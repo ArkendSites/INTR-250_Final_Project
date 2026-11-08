@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Think vs. Feel · A debate on what actually wins an argument</title>
+<meta name="description" content="A four-minute debate on logic versus emotion by Mateo Herrera and Dylan Young, based on I Never Thought of It That Way and Saving Us.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥊</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --black:#121212; --deep:#0b0b0b; --white:#f4f7ff;
+  --yellow:#ffd400; --yellow-deep:#7a6200;
+  --red:#e10600; --green:#1ed760; --green-deep:#128a43;
+  --pink:#ff2d95; --pink-deep:#e0115f;
+  --paper:#fbf3e4; --brown:#2b1a10; --gray:#8a8a8a; --line:#2c2c2c;
+  --anton:'Anton', Impact, 'Arial Narrow', sans-serif;
+  --body:'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --serif:'DM Serif Display', Georgia, serif;
+  --hand:'Caveat', 'Brush Script MT', cursive;
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{box-sizing:border-box}
+html{overscroll-behavior-y:none;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--white);font-family:var(--body);font-size:18px;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+h1,h2,h3,p,ul,ol{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:15px 26px;border:2px solid currentColor;border-radius:4px;font:700 17px/1 var(--body);text-decoration:none;cursor:pointer;background:transparent;color:var(--white);transition:background-color .28s,color .28s,border-color .28s}
+.btn .lbl{display:inline-block;transition:translate .28s ease}
+.btn:hover .lbl,.btn:focus-visible .lbl{translate:0 -2px}
+.btn-primary{background:var(--white);color:var(--black);border-color:var(--white)}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--yellow);border-color:var(--yellow)}
+.btn-outline{color:var(--white);border-color:var(--white)}
+.btn-outline .brand{color:var(--yellow);transition:color .28s}
+.btn-outline:hover,.btn-outline:focus-visible{background:var(--white);color:var(--black)}
+.btn-outline:hover .brand,.btn-outline:focus-visible .brand{color:var(--yellow-deep)}
+.btn-dark{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-dark:hover,.btn-dark:focus-visible{background:var(--yellow);color:var(--black);border-color:var(--yellow)}
+.btn-outline.on-light{color:var(--black);border-color:var(--black)}
+.btn-outline.on-light:hover,.btn-outline.on-light:focus-visible{background:var(--black);color:var(--white)}
+
+/* ---------- scoreboard ---------- */
+.score{display:inline-flex;align-items:center;gap:12px;background:var(--black);border:2px solid #3a3a3a;border-radius:6px;padding:6px 16px;font:700 14px/1 var(--body);color:var(--white);white-space:nowrap}
+.score b{font:400 30px/1 var(--anton);color:var(--yellow)}
+.score i{font:400 26px/1 var(--anton);color:var(--gray);font-style:normal}
+
+/* ---------- header ---------- */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:50;height:64px;background:var(--black);border-bottom:1px solid var(--line);transition:translate .35s ease}
+.site-header.is-hidden{translate:0 -100%}
+.site-header .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font:400 26px/1 var(--anton);letter-spacing:.5px;text-decoration:none;white-space:nowrap}
+.logo .vs{font:italic 20px/1 var(--serif);color:var(--red);margin:0 4px}
+.logo .feel{color:var(--yellow)}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a.navlink{font:700 15px/1 var(--body);text-decoration:none;color:#c9ccd6;padding:10px 12px}
+.nav a.navlink .lbl{display:inline-block;transition:translate .28s ease}
+.nav a.navlink:hover,.nav a.navlink:focus-visible{color:var(--white)}
+.nav a.navlink:hover .lbl,.nav a.navlink:focus-visible .lbl{translate:0 -2px}
+.nav .btn{padding:10px 18px;font-size:15px;margin-left:8px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100svh - 48px);padding:128px 0 64px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;background:#e1e2e6;color:var(--black)}
+.hero-stripe{position:absolute;left:0;right:0;top:64px;height:10px;background:var(--red);z-index:2}
+.hero-bg{position:absolute;left:0;right:0;top:-150px;height:calc(100% + 150px);will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:62% 45%}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(225,226,230,.94) 0%,rgba(225,226,230,.82) 36%,rgba(225,226,230,0) 60%);z-index:1}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero-grid{display:flex;flex-direction:column;gap:36px;max-width:640px}
+.hero-kicker{font:700 16px/1.3 var(--body);color:#b30000;margin-bottom:14px;letter-spacing:.08em}
+.t-think{display:block;width:clamp(300px,34vw,520px);height:auto;margin:6px 0 0 -2%}
+.t-feel{display:inline-flex;flex-direction:column;align-items:stretch;gap:clamp(12px,1.4vw,20px);background:#fdd535;padding:clamp(16px,1.8vw,26px) clamp(22px,2.4vw,36px)}
+.feel-img{width:clamp(210px,24vw,360px);height:auto}
+.feel-eyes-row{display:flex;justify-content:space-between;align-items:center}
+.feel-eyes-row img{height:clamp(20px,2.3vw,34px);width:auto}
+.t-vs{display:block;font:italic clamp(44px,4.6vw,80px)/1 var(--serif);color:#c41a14;margin:4px 0 6px 6px}
+.hero-copy{border-left:4px solid #c41a14;padding:6px 0 6px 28px}
+.hero-copy p{font-size:24px;line-height:1.3;font-weight:500}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:36px}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:56px;flex-wrap:wrap}
+.hero-foot p{font-size:18px}
+.hero-foot strong{color:#b30000}
+
+/* ---------- section heads ---------- */
+section{position:relative}
+.sec{padding:128px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:48px;flex-wrap:wrap}
+.sec-head h2{font:400 clamp(52px,7vw,96px)/.95 var(--anton);text-transform:uppercase}
+.sec-head p{max-width:46ch;color:#c9ccd6}
+.note{font:700 clamp(30px,3vw,40px)/1 var(--hand)}
+
+/* ---------- watch ---------- */
+.watch{background:var(--deep)}
+.player{position:relative;aspect-ratio:16/9;background:#000;border:2px solid #3a3a3a;border-radius:6px;overflow:hidden}
+.player video,.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.player-start{position:absolute;inset:0;width:100%;border:0;padding:0;cursor:pointer;color:var(--white);background:var(--black);font:inherit;text-align:left}
+.player-start .ps-inner{position:absolute;left:6%;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:20px}
+.ps-title{font:400 clamp(44px,7vw,112px)/.9 var(--anton)}
+.ps-title .vs{font:italic .45em var(--serif);color:var(--red);margin:0 .12em}
+.ps-title .feel{color:var(--yellow)}
+.ps-play{display:flex;align-items:center;gap:18px;font:700 20px/1.2 var(--body)}
+.ps-circle{width:84px;height:84px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;transition:scale .35s var(--ease),background-color .28s}
+.ps-circle::before{content:"";width:0;height:0;border-left:26px solid var(--black);border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:7px}
+.player-start:hover .ps-circle,.player-start:focus-visible .ps-circle{scale:1.08;background:var(--white)}
+.player-start .score{position:absolute;right:24px;top:24px}
+.ps-spot{position:absolute;right:13%;bottom:-18%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fdd535 0 55%,rgba(253,213,53,.35) 56%,rgba(253,213,53,0) 70%)}
+.ps-speaker{position:absolute;right:19%;bottom:0;height:78%;width:auto;transition:scale .35s var(--ease);transform-origin:50% 100%}
+.player-start:hover .ps-speaker,.player-start:focus-visible .ps-speaker{scale:1.03}
+.player-msg{position:absolute;left:24px;right:24px;bottom:24px;background:var(--red);color:#fff;padding:16px 20px;border-radius:4px;font-size:16px}
+.watch-note{margin-top:20px;font-size:16px;color:var(--gray)}
+
+/* ---------- fun cutouts ---------- */
+.ballot-bear{position:absolute;right:30px;bottom:100%;width:190px;height:auto;margin-bottom:-6px;pointer-events:none}
+.challenge-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:center;margin-bottom:72px}
+.climb{margin:0;border-radius:6px;overflow:hidden;box-shadow:14px 14px 0 #fdd535}
+.climb img{width:100%;height:auto}
+.challenge-copy{display:flex;flex-direction:column;gap:20px}
+.challenge-copy h2{font:400 clamp(52px,6vw,88px)/.95 var(--anton);text-transform:uppercase}
+.challenge-copy p{color:#c9ccd6;max-width:44ch}
+
+/* ---------- slide reel ---------- */
+.reel-sec{background:var(--deep);overflow:hidden}
+.reel-controls{display:flex;gap:12px}
+.icon-btn{width:52px;height:52px;border-radius:50%;border:2px solid var(--white);background:transparent;color:var(--white);cursor:pointer;display:grid;place-items:center;transition:background-color .28s,color .28s}
+.icon-btn svg{width:22px;height:22px;transition:translate .28s ease}
+.icon-btn:hover,.icon-btn:focus-visible{background:var(--white);color:var(--black)}
+.icon-btn:hover svg,.icon-btn:focus-visible svg{translate:0 -2px}
+.reel{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 max(40px,calc(50% - 580px));padding:14px max(40px,calc(50% - 580px)) 22px;scrollbar-width:none;overscroll-behavior-x:contain}
+.reel::-webkit-scrollbar{display:none}
+.frame{flex:0 0 min(560px,82vw);scroll-snap-align:start;margin:0}
+.frame-img{aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:2px solid #3a3a3a;background:#000;transition:scale .35s var(--ease),border-color .28s}
+.frame-img img{width:100%;height:100%;object-fit:cover}
+@media (hover:hover) and (min-width:861px){.frame:hover .frame-img{scale:1.03;border-color:var(--yellow)}}
+.frame figcaption{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.frame .num{font:600 13px/1 var(--body);color:var(--gray);letter-spacing:.08em}
+.frame .cap{font:600 18px/1.3 var(--body)}
+.mq{margin:10px 0 0;padding:2px 0 2px 16px;border-left:3px solid var(--yellow)}
+.mq p{font:italic 19px/1.4 var(--serif);color:#e6e8ee}
+.mq cite{display:block;margin-top:8px;font:500 13px/1.3 var(--body);font-style:normal;color:var(--gray)}
+.mq cite i{font-style:italic}
+
+/* pinned mode: vertical scroll drives the strip sideways */
+.reel-pin-on .reel-sec{padding:0;overflow:visible}
+.reel-pin-on .reel-sticky > .wrap{width:100%}
+.reel-pin-on .reel-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:72px 0 24px}
+.reel-pin-on .reel-sec .sec-head{margin-bottom:28px}
+.reel-pin-on .reel{overflow:visible;scroll-snap-type:none;will-change:translate}
+.reel-pin-on .reel-controls{display:none}
+.reel-progress{display:none}
+.reel-pin-on .reel-progress{display:block;height:3px;background:#2a2a2a;margin:8px auto 0;width:min(1160px,calc(100% - 80px));border-radius:2px;overflow:hidden}
+.reel-progress span{display:block;height:100%;width:100%;background:var(--yellow);transform-origin:0 50%;scale:0 1}
+
+/* ---------- collage / challenge ---------- */
+.challenge{background:var(--black)}
+.collage{position:relative;height:700px}
+.wedge{position:absolute;left:0;right:0;top:0;bottom:60px;overflow:hidden}
+.wedge img{position:absolute;top:-60px;height:calc(100% + 120px);object-fit:cover;will-change:transform}
+.w1{clip-path:polygon(0 0,34% 0,28% 100%,0 100%)}
+.w1 img{left:0;width:34%}
+.w2{clip-path:polygon(35.6% 0,66% 0,71% 100%,29.6% 100%)}
+.w2 img{left:29.6%;width:41.4%;object-position:46% 50%}
+.w3{clip-path:polygon(67.6% 0,100% 0,100% 100%,72.6% 100%)}
+.w3 img{left:67.6%;width:32.4%}
+.w-label{position:absolute;top:24px;font:700 34px/1 var(--hand);z-index:2;pointer-events:none}
+.w-label.l{left:24px;color:var(--white)}
+.w-label.r{right:24px;color:var(--green)}
+.w-label{text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.sticky-note{position:absolute;right:-12px;bottom:0;width:470px;background:#ffe066;color:var(--brown);padding:36px 42px 30px;rotate:-2deg;box-shadow:0 22px 48px rgba(0,0,0,.5);z-index:3}
+.sn-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.sn-eyes{display:flex;gap:10px;align-items:center;flex:0 0 auto}
+.sn-eyes img{height:24px;width:auto}
+.sticky-note .sn-label{font:700 15px/1 var(--body);letter-spacing:.08em}
+.sticky-note .sn-quote{font:700 54px/1 var(--hand);margin:12px 0 12px}
+.sticky-note .sn-sub{font-size:16px;line-height:1.45}
+.sticky-note .sn-check{font:500 14px/1 var(--body);color:#6b4a3a;margin-top:14px}
+
+/* ---------- vote ---------- */
+.vote{background:#f4efe3;color:var(--black);padding-bottom:128px}
+.vote-band{height:320px;overflow:hidden}
+.vote-band img{width:100%;height:100%;object-fit:cover}
+.vote-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;margin-top:-150px;position:relative}
+.ballot{position:relative;background:#fffdf8;border:4px solid var(--black);padding:44px;box-shadow:12px 12px 0 var(--black)}
+.ballot h2{font:400 clamp(56px,6vw,96px)/.95 var(--anton);text-transform:uppercase}
+.ballot-body{display:flex;gap:36px;align-items:center;margin:32px 0}
+.qr{width:220px;height:220px;border:2px solid var(--black);padding:10px;background:#fff;flex:0 0 auto;image-rendering:pixelated}
+.checks{display:flex;flex-direction:column;gap:6px;font-size:20px}
+.checks .q{font:700 15px/1 var(--body);color:#c41a14;margin-top:12px;letter-spacing:.08em}
+.checks .q:first-child{margin-top:0}
+.ballot .small{font-size:14px;color:#555;margin-top:14px}
+.cited{padding-top:0}
+.ballot{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "body" "btn" "small" "mateo";align-items:start}
+.ballot h2{grid-area:title}
+.ballot .ballot-body{grid-area:body}
+.ballot .poll-link{grid-area:btn;justify-self:start}
+.ballot .small{grid-area:small}
+.mateo{grid-area:mateo;margin-top:36px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.mateo-note{font:600 17px/1.35 var(--body);max-width:320px}
+.mateo img{width:300px;height:auto;margin-bottom:-44px;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
+.books{display:flex;gap:28px;align-items:flex-end;margin-bottom:44px}
+.books figure{margin:0}
+.books img{width:168px;height:auto;border:2px solid var(--black);box-shadow:6px 6px 0 var(--black)}
+.books figcaption{font-size:13px;color:#555;margin-top:12px}
+.cited h3{font:700 15px/1 var(--body);color:#555;margin-bottom:16px;letter-spacing:.08em}
+.cited ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.45}
+.cited li{padding-left:2em;text-indent:-2em;overflow-wrap:anywhere}
+.cited .about{margin-top:40px;font-size:16px;line-height:1.55}
+
+/* ---------- footer ---------- */
+.site-footer{background:var(--black);padding:72px 0 calc(48px + env(safe-area-inset-bottom,0px));border-top:10px solid var(--red)}
+.site-footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:start}
+.site-footer .logo{font-size:40px}
+.site-footer p{font-size:15px;color:#b9bcc6;max-width:60ch}
+.site-footer p+p{margin-top:12px}
+
+/* ---------- reveals (translate + opacity only) ---------- */
+.js [data-reveal]{translate:0 var(--rd,36px);opacity:0;transition:translate var(--rt,.9s) var(--ease) var(--rdl,0s),opacity var(--rt,.9s) var(--ease) var(--rdl,0s)}
+.js [data-reveal].is-in{translate:0 0;opacity:1}
+.js [data-reveal].is-above{translate:0 calc(var(--rd,36px) * -.6);opacity:0}
+
+/* ---------- narrow mode ---------- */
+@media (max-width:860px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  .nav a.navlink.wide-only{display:none}
+  .hero{min-height:clamp(360px,calc(100svh - 155px),760px);padding:104px 0 40px}
+  .hero-bg img{object-position:66% 70%}
+  .hero-fade{background:linear-gradient(180deg,rgba(225,226,230,.7) 0%,rgba(225,226,230,.35) 34%,rgba(225,226,230,0) 60%)}
+  .hero-copy{background:rgba(236,237,240,.88);padding:16px 18px 18px 20px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .hero-foot p{background:rgba(236,237,240,.88);padding:6px 10px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .t-think{width:min(78vw,380px)}
+  .feel-img{width:min(58vw,280px)}
+  .feel-eyes-row img{height:clamp(20px,6vw,28px)}
+  .hero-copy{padding:6px 0 6px 20px}
+  .hero-copy p{font-size:20px}
+  .hero-actions{margin-top:22px}
+  .hero-actions .btn{flex:1 1 auto}
+  .hero-foot{margin-top:28px}
+  .sec{padding:88px 0}
+  .sec-head{margin-bottom:32px}
+  .ps-spot{right:-12%;width:50%}
+  .ps-speaker{right:-1%;height:66%}
+  .ps-min{display:none}
+  .ps-title{font-size:34px}
+  .ps-play{font-size:15px}
+  .ps-circle{width:64px;height:64px}
+  .ps-circle::before{border-left-width:20px;border-top-width:12px;border-bottom-width:12px}
+  .player-start .score{display:none}
+  .reel{gap:16px;scroll-padding:0 20px;padding:10px 20px 18px}
+  .reel-pin-on .reel-sticky{padding:64px 0 16px}
+  .reel-pin-on .reel-sec .sec-head{margin-bottom:16px}
+  .reel-pin-on .reel-progress{width:calc(100% - 40px)}
+  .reel-pin-on .frame{flex-basis:78vw}
+  .mq p{font-size:16px}
+  .ballot-bear{width:116px;right:16px}
+  .challenge-intro{grid-template-columns:1fr;gap:36px;margin-bottom:48px}
+  .climb{box-shadow:8px 8px 0 #fdd535;margin-right:8px}
+  .reel-controls{display:none}
+  .collage{height:720px}
+  .wedge{bottom:300px}
+  .w1{display:none}
+  .w2{clip-path:polygon(0 0,48% 0,54% 100%,0 100%)}
+  .w2 img{left:0;width:54%}
+  .w3{clip-path:polygon(50% 0,100% 0,100% 100%,56% 100%)}
+  .w3 img{left:50%;width:50%}
+  .w-label.l{display:none}
+  .sticky-note{left:16px;right:16px;width:auto;padding:26px 26px 22px;rotate:-1deg}
+  .sticky-note .sn-quote{font-size:46px}
+  .vote-band{height:220px}
+  .vote-grid{grid-template-columns:1fr;gap:40px;margin-top:-90px}
+  .ballot{padding:26px;box-shadow:8px 8px 0 var(--black)}
+  .ballot-body{flex-direction:column;align-items:flex-start;gap:24px}
+  .qr{width:180px;height:180px}
+  .cited{padding-top:0}
+  .ballot{grid-template-columns:150px minmax(0,1fr);grid-template-areas:"title title" "qr mateo" "checks mateo" "btn mateo" "small small";column-gap:10px}
+  .ballot .poll-link{padding:13px 16px}
+  .ballot .ballot-body{display:contents}
+  .ballot .qr{grid-area:qr;width:132px;height:132px;margin-top:24px}
+  .ballot .checks{grid-area:checks;margin:20px 0 24px;font-size:18px}
+  .ballot .checks .q{font-size:13px;line-height:1.3}
+  .mateo{margin:24px -26px 0 0;align-self:end;align-items:center;gap:22px}
+  .mateo-note{font-size:14px;text-align:center;max-width:180px}
+  .mateo img{width:100%;max-width:330px;margin-bottom:0}
+  .books img{width:132px}
+  .sn-eyes img{height:19px}
+  .site-footer .wrap{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:360px){
+  .logo{font-size:21px}
+  .nav .btn{padding:8px 12px;font-size:14px;margin-left:2px}
+  .nav a.navlink{padding:8px 6px;font-size:14px}
+  .sec-head h2{font-size:44px}
+  .ballot h2{font-size:48px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  .js [data-reveal]{translate:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Think vs. Feel, back to top">THINK<span class="vs">vs.</span><span class="feel">FEEL</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a class="navlink" href="#watch"><span class="lbl">Watch</span></a>
+      <a class="navlink wide-only" href="#slides"><span class="lbl">Slides</span></a>
+      <a class="btn btn-outline" href="#vote"><span class="lbl">Vote</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO: fight poster -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-stripe" aria-hidden="true"></div>
+  <div class="hero-bg" id="hero-bg" aria-hidden="true">
+    <img src="assets/img/justice-hero.webp" srcset="assets/img/justice-hero-sm.webp 800w, assets/img/justice-hero.webp 1322w" sizes="100vw" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-kicker">INTR250P PRESENTS · ONE NIGHT ONLY</p>
+        <h1 id="hero-title" aria-label="Think vs. Feel"><img class="t-think" src="assets/img/think-word.webp" alt="" width="1100" height="437"><span class="t-vs" aria-hidden="true">vs.</span><span class="t-feel" aria-hidden="true"><span class="feel-eyes-row"><img src="assets/img/eye-1.webp" alt=""><img src="assets/img/eye-2.webp" alt=""><img src="assets/img/eye-3.webp" alt=""></span><img class="feel-img" src="assets/img/feel-word.webp" alt="" width="921" height="204"><span class="feel-eyes-row"><img src="assets/img/eye-7.webp" alt=""><img src="assets/img/eye-5.webp" alt=""><img src="assets/img/eye-9.webp" alt=""></span></span></h1>
+      </div>
+      <div class="hero-copy">
+        <p>Dylan vs. Mateo.<br>Four minutes.<br>One winner. Maybe.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#watch"><span class="lbl">Watch the debate</span></a>
+          <a class="btn btn-outline on-light" href="#vote"><span class="lbl">Cast your vote</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <p><strong>FEATURING</strong> Mateo Herrera &amp; Dylan Young</p>
+      <div class="score" aria-label="Score: Dylan 0, Mateo 0">DYLAN <b>0</b><i>–</i><b>0</b> MATEO</div>
+    </div>
+  </div>
+</section>
+
+<!-- WATCH -->
+<section class="sec watch" id="watch" aria-labelledby="watch-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="watch-title" data-reveal="0.6">Watch the debate</h2>
+    </div>
+    <div class="player" id="player" data-reveal="1.3">
+      <video id="debate-video" controls playsinline preload="metadata" hidden></video>
+      <button class="player-start" id="player-start" type="button" aria-label="Play the debate, about four minutes">
+        <span class="ps-spot" aria-hidden="true"></span><img class="ps-speaker" src="assets/img/speaker.webp" alt="" loading="lazy" width="560" height="643">
+        <span class="score" aria-hidden="true">DYLAN <b>0</b><i>–</i><b>0</b> MATEO</span>
+        <span class="ps-inner">
+          <span class="ps-title">THINK<span class="vs">vs.</span><span class="feel">FEEL</span></span>
+          <span class="ps-play"><span class="ps-circle" aria-hidden="true"></span>Play the debate<span class="ps-min"><br>(about 4 minutes)</span></span>
+        </span>
+      </button>
+      <p class="player-msg" id="player-msg" hidden></p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE REEL -->
+<section class="sec reel-sec" id="slides" aria-labelledby="slides-title">
+<div class="reel-pin" id="reel-pin"><div class="reel-sticky">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 id="slides-title" data-reveal="0.6">From the slides</h2>
+      </div>
+      <div class="reel-controls" data-reveal="0.45">
+        <button class="icon-btn" type="button" id="reel-prev" aria-label="Previous slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="icon-btn" type="button" id="reel-next" aria-label="Next slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="reel" id="reel" data-stretch data-row tabindex="0" aria-label="Slides from the debate">
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-05-sm.webp" srcset="assets/img/slide-05-sm.webp 800w, assets/img/slide-05.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: Feelings are why bad ideas live forever, with three exhibits over a chessboard" loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 5</span><span class="cap">Dylan’s opening argument</span><blockquote class="mq"><p>“Zombie arguments work because they’re short, catchy gotchas, and they keep circulating among the people who already want to hear them.”</p><cite>Mateo – <i>Saving Us</i>, ch. 4</cite></blockquote></figcaption>
+    </figure>
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-06-sm.webp" srcset="assets/img/slide-06-sm.webp 800w, assets/img/slide-06.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: Among people politically opposed to climate action, more science literacy produces more rejection" loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 6</span><span class="cap">The study Mateo leaned on</span><blockquote class="mq"><p>“The smarter people are, the better they are at defending their view, and the more they resist changing it.”</p><cite>Mateo – <i>Saving Us</i>, ch. 5</cite></blockquote></figcaption>
+    </figure>
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-07-sm.webp" srcset="assets/img/slide-07-sm.webp 800w, assets/img/slide-07.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: The emotional dog and its rational tail, with quotes from Haidt and Hume" loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 7</span><span class="cap">Haidt and Hume back up Mateo</span><blockquote class="mq"><p>“Facts describe; they don’t prescribe. They give us context, but they don’t give us an ought.”</p><cite>Mateo – <i>Saving Us</i>, ch. 5</cite></blockquote></figcaption>
+    </figure>
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-08-sm.webp" srcset="assets/img/slide-08-sm.webp 800w, assets/img/slide-08.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: Alert, live. Motivated reasoning detected." loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 8</span><span class="cap">The moment Dylan got caught</span><blockquote class="mq"><p>“Motivated reasoning is our emotional habit of rationalizing our biases so we can prove we’re right.”</p><cite>Mateo – <i>Saving Us</i>, ch. 5</cite></blockquote></figcaption>
+    </figure>
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-10-sm.webp" srcset="assets/img/slide-10-sm.webp 800w, assets/img/slide-10.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: Then what? Unverified. A heartbreaking story can still be false." loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 10</span><span class="cap">Dylan’s comeback</span><blockquote class="mq"><p>“Curiosity won’t get you very far if you can’t properly evaluate what it uncovers.”</p><cite>Mateo – <i>I Never Thought of It That Way</i>, epilogue</cite></blockquote></figcaption>
+    </figure>
+    <figure class="frame" data-reveal="1.1">
+      <div class="frame-img"><img src="assets/img/slide-13-sm.webp" srcset="assets/img/slide-13-sm.webp 800w, assets/img/slide-13.webp 1600w" sizes="(max-width:860px) 82vw, 560px" alt="Slide: Feel to connect, think to evaluate" loading="lazy"></div>
+      <figcaption><span class="num">SLIDE 13</span><span class="cap">Where we ended up</span><blockquote class="mq"><p>“Tying a hazy threat to people’s own values and concerns is surprisingly effective.”</p><cite>Mateo – <i>Saving Us</i>, ch. 3</cite></blockquote></figcaption>
+    </figure>
+  </div>
+  <div class="reel-progress" aria-hidden="true"><span id="reel-bar"></span></div>
+</div></div>
+</section>
+
+<!-- CHALLENGE COLLAGE -->
+<section class="sec challenge" id="challenge" aria-labelledby="challenge-title">
+  <div class="wrap">
+    <div class="challenge-intro">
+      <figure class="climb" data-reveal="1.2"><img src="assets/img/hikers.webp" alt="Two hikers on a rocky peak, one reaching down to pull the other up" loading="lazy" width="850" height="575"></figure>
+      <div class="challenge-copy">
+      <h2 id="challenge-title" data-reveal="0.6">Our challenge to you</h2>
+      <p data-reveal="0.7">Mónica Guzmán closes <i>I Never Thought of It That Way</i> with a habit anyone can practice, whether they lean toward logic or emotion.</p>
+      <p data-reveal="0.7">It doesn’t ask you to change your mind, just to reach across long enough to see what the other person sees.</p>
+      </div>
+    </div>
+    <div class="collage" id="collage" data-stretch data-reveal="1.5">
+      <div class="wedge w1" aria-hidden="true"><img src="assets/img/flowers-sm.webp" srcset="assets/img/flowers-sm.webp 800w, assets/img/flowers.webp 1600w" sizes="34vw" alt="" loading="lazy" data-drift="0.75"></div>
+      <div class="wedge w2"><img src="assets/img/portrait.webp" alt="Portrait of a woman half in shadow, smiling slightly" loading="lazy" data-drift="1"></div>
+      <div class="wedge w3" aria-hidden="true"><img src="assets/img/green-grid-sm.webp" srcset="assets/img/green-grid-sm.webp 800w, assets/img/green-grid.webp 1600w" sizes="34vw" alt="" loading="lazy" data-drift="1.25"></div>
+      <span class="w-label l" aria-hidden="true">feel</span>
+      <span class="w-label r" aria-hidden="true">think</span>
+      <div class="sticky-note">
+        <div class="sn-top"><p class="sn-label">GUZMÁN’S CHALLENGE</p><span class="sn-eyes"><img src="assets/img/eye-2.webp" alt=""><img src="assets/img/eye-4.webp" alt=""><img src="assets/img/eye-6.webp" alt=""></span></div>
+        <p class="sn-quote">“I never thought of it that way.”</p>
+        <p class="sn-sub">Try saying it once a day when someone shows you a perspective you hadn’t considered.</p>
+        <p class="sn-check">Guzmán, 2022, p. 236</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- VOTE -->
+<section class="vote" id="vote" aria-labelledby="vote-title">
+  <div class="vote-band" aria-hidden="true"><img src="assets/img/votes-sm.webp" srcset="assets/img/votes-sm.webp 800w, assets/img/votes.webp 1600w" sizes="100vw" alt="" loading="lazy"></div>
+  <div class="wrap vote-grid">
+    <div class="ballot" data-reveal="1.1">
+      <img class="ballot-bear" src="assets/img/bear.webp" alt="" aria-hidden="true" loading="lazy" width="600" height="579">
+      
+      <h2 id="vote-title">Cast your vote</h2>
+      <div class="ballot-body">
+        <img class="qr" src="assets/img/poll-qr.png" alt="QR code that opens our poll" loading="lazy" width="220" height="220">
+        <div class="checks" aria-label="What the poll asks">
+          <p class="q">WHO WON?</p>
+          <p>☐ Dylan</p><p>☐ Mateo</p>
+          <p class="q">HOW DID YOU DECIDE?</p>
+          <p>☐ Head</p><p>☐ Gut</p>
+        </div>
+      </div>
+      <a class="btn btn-outline on-light poll-link" href="#" target="_blank" rel="noopener"><span class="lbl">Open the poll</span></a>
+      <p class="small">Scan the code or open the link to vote. It only takes a few seconds.</p>
+      <div class="mateo">
+        <p class="mateo-note">Dylan, send me an epic picture of yourself so I can put you in here too!</p>
+        <img src="assets/img/mateo.webp" alt="Mateo in a suit, pointing at the camera" loading="lazy" width="700" height="784">
+      </div>
+    </div>
+    <div class="cited">
+      <h3 data-reveal="0.45">THE BOOKS</h3>
+      <div class="books" data-row>
+        <figure data-reveal="0.9"><img src="assets/img/book-guzman.webp" alt="Cover of I Never Thought of It That Way by Mónica Guzmán" loading="lazy" width="168" height="252"><figcaption>Mónica Guzmán, 2022</figcaption></figure>
+        <figure data-reveal="0.9"><img src="assets/img/book-hayhoe.webp" alt="Cover of Saving Us by Katharine Hayhoe" loading="lazy" width="168" height="255"><figcaption>Katharine Hayhoe, 2021</figcaption></figure>
+      </div>
+      <h3 data-reveal="0.45">WORKS CITED</h3>
+      <ul data-row>
+        <li data-reveal="0.7">Guzmán, M. (2022). <i>I never thought of it that way: How to have fearlessly curious conversations in dangerously divided times</i>. BenBella Books.</li>
+        <li data-reveal="0.7">Haidt, J. (2001). The emotional dog and its rational tail: A social intuitionist approach to moral judgment. <i>Psychological Review, 108</i>(4), 814–834. https://doi.org/10.1037/0033-295X.108.4.814</li>
+        <li data-reveal="0.7">Hayhoe, K. (2021). <i>Saving us: A climate scientist’s case for hope and healing in a divided world</i>. One Signal Publishers/Atria.</li>
+        <li data-reveal="0.7">Hume, D. (2000). <i>A treatise of human nature</i> (D. F. Norton &amp; M. J. Norton, Eds.). Oxford University Press. (Original work published 1739)</li>
+        <li data-reveal="0.7">Kahan, D. M., Peters, E., Wittlin, M., Slovic, P., Ouellette, L. L., Braman, D., &amp; Mandel, G. (2012). The polarizing impact of science literacy and numeracy on perceived climate change risks. <i>Nature Climate Change, 2</i>(10), 732–735. https://doi.org/10.1038/nclimate1547</li>
+        <li data-reveal="0.7">Kahneman, D. (2011). <i>Thinking, fast and slow</i>. Farrar, Straus and Giroux.</li>
+      </ul>
+      <p class="about" data-reveal="0.8">We made this for our INTR250P final project.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="logo" href="#top">THINK<span class="vs">vs.</span><span class="feel">FEEL</span></a>
+    <div>
+      <p>Made by Mateo Herrera and Dylan Young for INTR250P at North Idaho College, fall 2026.</p>
+      <p>We used Claude, an AI assistant, to help brainstorm, draft the script, and build this website. The argument, the slide design, and the performance are our own.</p>
+    </div>
+    <a class="btn btn-outline" href="#top"><span class="lbl">Back to top</span></a>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   SETTINGS: edit these
+   ===================================================================== */
+const SITE = {
+  videoFile: 'video/think-vs-feel.mp4',  // upload your recording here in the repo
+  youtubeId: '',                          // or paste an unlisted YouTube video ID instead
+  pollUrl: 'https://qrto.org/kA5ZKe'      // your poll (from the QR code on your last slide)
+};
+
+/* =====================================================================
+   SHARED STATE
+   ===================================================================== */
+const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+const narrowQuery = window.matchMedia('(max-width: 860px)');
+const hoverQuery = window.matchMedia('(hover: hover)');
+const rootEl = document.documentElement;
+function clampNum(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+function pageScrollsItself(){ return rootEl.scrollHeight > window.innerHeight + 2; }
+function isTyping(t){ return t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)); }
+
+document.querySelectorAll('.poll-link').forEach(a => { a.href = SITE.pollUrl; });
+
+/* =====================================================================
+   VIDEO PLAYER
+   ===================================================================== */
+(() => {
+  const box = document.getElementById('player');
+  const startBtn = document.getElementById('player-start');
+  const vid = document.getElementById('debate-video');
+  const msg = document.getElementById('player-msg');
+  function startYouTube(){
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(SITE.youtubeId) + '?autoplay=1&rel=0';
+    f.title = 'Think vs. Feel debate video';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    box.appendChild(f); startBtn.hidden = true;
+  }
+  function startFile(){
+    if (!vid.getAttribute('src')) {
+      vid.src = SITE.videoFile;
+      vid.addEventListener('error', () => {
+        startBtn.hidden = false; vid.hidden = true;
+        msg.textContent = 'The video file wasn’t found. Upload your recording to ' + SITE.videoFile + ' in the repo, or set SITE.youtubeId in index.html.';
+        msg.hidden = false;
+      }, {once:true});
+    }
+    vid.hidden = false; startBtn.hidden = true; msg.hidden = true;
+    vid.play().catch(()=>{});
+    vid.focus({preventScroll:true});
+  }
+  startBtn.addEventListener('click', () => { if (SITE.youtubeId) startYouTube(); else startFile(); });
+})();
+
+/* Slide reel: pinned sideways scroll (vertical scroll moves the strip), buttons as fallback */
+(() => {
+  const reel = document.getElementById('reel');
+  const pin = document.getElementById('reel-pin');
+  const bar = document.getElementById('reel-bar');
+  let on = false, dist = 0, pinTop = 0, lastX = null;
+  const step = dir => {
+    const f = reel.querySelector('.frame');
+    const by = (f ? f.getBoundingClientRect().width + 28 : 500) * dir;
+    reel.scrollBy({left: by, behavior: motionReduced.matches ? 'auto' : 'smooth'});
+  };
+  document.getElementById('reel-prev').addEventListener('click', () => step(-1));
+  document.getElementById('reel-next').addEventListener('click', () => step(1));
+
+  function update(){
+    if (!on) return;
+    const p = clampNum((window.scrollY - pinTop) / Math.max(1, dist), 0, 1);
+    const x = (-p * dist).toFixed(1);
+    if (x !== lastX) { reel.style.translate = x + 'px 0'; bar.style.scale = p.toFixed(4) + ' 1'; lastX = x; }
+  }
+  function measure(){
+    if (!on) return;
+    reel.style.translate = '0px 0'; lastX = null;
+    dist = Math.max(0, reel.scrollWidth - reel.clientWidth);
+    pin.style.height = (window.innerHeight + dist) + 'px';
+    pinTop = pin.getBoundingClientRect().top + window.scrollY;
+    update();
+  }
+  function evaluate(){
+    const want = !motionReduced.matches && pageScrollsItself();
+    if (want !== on) {
+      on = want;
+      rootEl.classList.toggle('reel-pin-on', on);
+      if (!on) { pin.style.height = ''; reel.style.translate = ''; }
+    }
+    measure();
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', evaluate);
+  window.addEventListener('load', evaluate);
+  document.fonts && document.fonts.ready.then(evaluate);
+  motionReduced.addEventListener('change', evaluate);
+  reel.querySelectorAll('img').forEach(im => im.addEventListener('load', measure, {once:true}));
+  evaluate();
+})();
+
+/* =====================================================================
+   1. SCROLL ENGINE: glide (wide), speed stretch + depth (both)
+   ===================================================================== */
+const scrollApi = (() => {
+  let glideOn = false;
+  let targetY = window.scrollY, currentY = window.scrollY;
+  let gliding = false, inputKind = 'wheel', lastFrame = 0;
+  let selfScrolling = false;
+  const header = 64;
+
+  function evaluate(){
+    glideOn = !motionReduced.matches && !narrowQuery.matches && pageScrollsItself();
+  }
+  function maxY(){ return rootEl.scrollHeight - window.innerHeight; }
+
+  function step(now){
+    const dt = Math.min(64, now - (lastFrame || now - 16.667)); lastFrame = now;
+    const base = inputKind === 'trackpad' ? 0.34 : 0.13;
+    const k = 1 - Math.pow(1 - base, dt / 16.667);
+    currentY += (targetY - currentY) * k;
+    if (Math.abs(targetY - currentY) < 0.5) { currentY = targetY; gliding = false; }
+    selfScrolling = true;
+    window.scrollTo(0, Math.round(currentY * 100) / 100);
+    if (gliding) requestAnimationFrame(step); else lastFrame = 0;
+  }
+  function glideTo(y){
+    targetY = clampNum(y, 0, maxY());
+    if (!gliding) { gliding = true; currentY = window.scrollY; requestAnimationFrame(step); }
+  }
+
+  window.addEventListener('wheel', e => {
+    if (!glideOn || e.ctrlKey) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (e.target.closest && e.target.closest('dialog, iframe, [data-native-scroll]')) return;
+    let d = e.deltaY;
+    if (e.deltaMode === 1) d *= 40; else if (e.deltaMode === 2) d *= window.innerHeight;
+    const small = e.deltaMode === 0 && (Math.abs(e.deltaY) < 40 || e.deltaY % 1 !== 0);
+    inputKind = small ? 'trackpad' : 'wheel';
+    e.preventDefault();
+    if (!gliding) targetY = window.scrollY;
+    glideTo(targetY + d);
+  }, {passive:false});
+
+  window.addEventListener('keydown', e => {
+    if (!glideOn || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isTyping(e.target)) return;
+    if (e.target.closest && e.target.closest('video, iframe, button')) {
+      if (e.key === ' ' ) return;
+    }
+    const page = window.innerHeight - 90;
+    const from = gliding ? targetY : window.scrollY;
+    let to = null;
+    switch (e.key) {
+      case ' ': to = from + (e.shiftKey ? -page : page); break;
+      case 'PageDown': to = from + page; break;
+      case 'PageUp': to = from - page; break;
+      case 'ArrowDown': to = from + 90; break;
+      case 'ArrowUp': to = from - 90; break;
+      case 'Home': to = 0; break;
+      case 'End': to = maxY(); break;
+    }
+    if (to === null) return;
+    e.preventDefault(); inputKind = 'wheel'; glideTo(to);
+  });
+
+  function goTo(el){
+    const y = el.getBoundingClientRect().top + window.scrollY - header;
+    if (glideOn) { inputKind = 'wheel'; glideTo(y); }
+    else window.scrollTo({top:y, behavior: motionReduced.matches ? 'auto' : 'smooth'});
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    const el = id ? document.getElementById(id) : null;
+    if (!el && id !== '') return;
+    e.preventDefault();
+    if (id === 'top' || id === '') { glideOn ? glideTo(0) : window.scrollTo({top:0, behavior: motionReduced.matches ? 'auto' : 'smooth'}); }
+    else goTo(el);
+  });
+
+  window.addEventListener('scroll', () => {
+    if (!selfScrolling && !gliding) { targetY = currentY = window.scrollY; }
+    selfScrolling = false;
+  }, {passive:true});
+
+  evaluate();
+  motionReduced.addEventListener('change', evaluate);
+  narrowQuery.addEventListener('change', evaluate);
+  window.addEventListener('resize', evaluate);
+  window.addEventListener('load', evaluate);
+  return { goTo };
+})();
+
+/* Speed stretch + depth: one rAF loop that stops when idle */
+(() => {
+  const stretchEls = Array.from(document.querySelectorAll('[data-stretch]'));
+  const heroBg = document.getElementById('hero-bg');
+  const collage = document.getElementById('collage');
+  const driftImgs = Array.from(collage.querySelectorAll('img[data-drift]'));
+  let boxes = [], collageBox = null, heroH = 0;
+  let lastY = window.scrollY, lastT = 0, speed = 0, running = false;
+  const applied = new WeakMap();
+  let heroLast = null; const driftLast = new WeakMap();
+
+  function measure(){
+    const y = window.scrollY;
+    boxes = stretchEls.map(el => { const r = el.getBoundingClientRect(); return {el, top:r.top + y, bottom:r.bottom + y}; });
+    const c = collage.getBoundingClientRect(); collageBox = {top:c.top + y, h:c.height};
+    heroH = document.getElementById('top').offsetHeight;
+  }
+  function setT(el, val, cache){ if (cache.get(el) !== val) { el.style.transform = val; cache.set(el, val); } }
+
+  function frame(now){
+    const y = window.scrollY;
+    const dt = Math.max(1, now - (lastT || now - 16.667)); lastT = now;
+    const v = (y - lastY) / dt; lastY = y;
+    speed += (v - speed) * (1 - Math.pow(1 - 0.18, dt / 16.667));
+    const s = clampNum(speed / 3.2, -1, 1);
+    const atRest = Math.abs(speed) < 0.004;
+    const vh = window.innerHeight;
+    for (const b of boxes) {
+      const onScreen = b.bottom > y - 100 && b.top < y + vh + 100;
+      let t = '';
+      if (!atRest && onScreen) {
+        const skew = (1.6 * s).toFixed(3), sy = (1 + 0.03 * Math.abs(s)).toFixed(4);
+        t = 'skewY(' + skew + 'deg) scaleY(' + sy + ')';
+      }
+      setT(b.el, t, applied);
+    }
+    // depth: hero photo
+    if (y < heroH + 200) {
+      const hv = 'translate3d(0,' + Math.min(y * 0.28, 150).toFixed(1) + 'px,0)';
+      if (hv !== heroLast) { heroBg.style.transform = hv; heroLast = hv; }
+    }
+    // depth: collage photos drift inside fixed frames
+    if (collageBox) {
+      const center = collageBox.top + collageBox.h / 2;
+      const p = clampNum((y + vh / 2 - center) / (vh / 2 + collageBox.h / 2), -1, 1);
+      for (const img of driftImgs) {
+        const r = parseFloat(img.dataset.drift);
+        const d = clampNum(-45 * p * r, -45, 45).toFixed(1);
+        const val = 'translate3d(0,' + d + 'px,0)';
+        if (driftLast.get(img) !== val) { img.style.transform = val; driftLast.set(img, val); }
+      }
+    }
+    if (atRest && Math.abs(y - lastY) < 0.5) { speed = 0; running = false; lastT = 0; for (const b of boxes) setT(b.el, '', applied); return; }
+    requestAnimationFrame(frame);
+  }
+  function kick(){ if (motionReduced.matches) return; if (!running) { running = true; lastY = window.scrollY; requestAnimationFrame(frame); } }
+
+  measure();
+  window.addEventListener('scroll', kick, {passive:true});
+  window.addEventListener('resize', () => { measure(); kick(); });
+  window.addEventListener('load', () => { measure(); kick(); });
+  document.fonts && document.fonts.ready.then(() => { measure(); kick(); });
+  motionReduced.addEventListener('change', () => {
+    if (motionReduced.matches) { stretchEls.forEach(el => el.style.transform = ''); heroBg.style.transform = ''; driftImgs.forEach(i => i.style.transform = ''); }
+  });
+  kick();
+})();
+
+/* =====================================================================
+   2. SCROLL REVEALS (IntersectionObserver, trigger-based)
+   ===================================================================== */
+(() => {
+  const els = Array.from(document.querySelectorAll('[data-reveal]'));
+  if (motionReduced.matches || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-in')); return; }
+  // row ripple: stagger 80ms, heavier per item
+  document.querySelectorAll('[data-row]').forEach(row => {
+    const kids = Array.from(row.querySelectorAll(':scope > [data-reveal]'));
+    const inc = parseFloat(row.dataset.revealInc || '0');
+    kids.forEach((k, i) => {
+      k.style.setProperty('--rdl', (i * 0.08).toFixed(2) + 's');
+      if (inc) k.dataset.reveal = (parseFloat(k.dataset.reveal) + inc * i).toFixed(2);
+    });
+  });
+  els.forEach(el => {
+    const sp = parseFloat(el.dataset.reveal) || 1;
+    el.style.setProperty('--rd', (36 * sp).toFixed(1) + 'px');
+    el.style.setProperty('--rt', (0.55 + 0.35 * sp).toFixed(3) + 's');
+  });
+  const io = new IntersectionObserver(entries => {
+    for (const en of entries) {
+      const el = en.target;
+      if (en.isIntersecting && en.intersectionRatio >= 0.12) { el.classList.add('is-in'); el.classList.remove('is-above'); }
+      else if (!en.isIntersecting) {
+        if (en.boundingClientRect.top < 0) { if (el.classList.contains('is-in')) { el.classList.add('is-above'); el.classList.remove('is-in'); } }
+        else { el.classList.remove('is-in', 'is-above'); }
+      }
+    }
+  }, {threshold:[0, 0.12]});
+  els.forEach(el => io.observe(el));
+})();
+
+/* =====================================================================
+   3. MICRO-INTERACTIONS: header hides on scroll down
+   ===================================================================== */
+(() => {
+  const hdr = document.getElementById('site-header');
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY, dy = y - lastY;
+    if (y < 80) { hdr.classList.remove('is-hidden'); lastY = y; return; }
+    if (Math.abs(dy) < 6) return;
+    if (dy > 0 && !hdr.contains(document.activeElement)) hdr.classList.add('is-hidden');
+    else hdr.classList.remove('is-hidden');
+    lastY = y;
+  }, {passive:true});
+  hdr.addEventListener('focusin', () => hdr.classList.remove('is-hidden'));
+})();
+
+</script>
+</body>
+</html>
