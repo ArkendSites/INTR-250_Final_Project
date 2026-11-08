@@ -118,10 +118,10 @@ section{position:relative}
 .watch-note{margin-top:20px;font-size:16px;color:var(--gray)}
 
 /* ---------- fun cutouts ---------- */
-.ballot-bear{position:absolute;right:30px;bottom:100%;width:190px;height:auto;margin-bottom:-6px;pointer-events:none}
+.ballot-bear{position:absolute;right:24px;bottom:100%;width:290px;height:auto;margin-bottom:-6px;pointer-events:none}
 .challenge-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:center;margin-bottom:72px}
-.climb{margin:0;border-radius:6px;overflow:hidden;box-shadow:14px 14px 0 #fdd535}
-.climb img{width:100%;height:auto}
+.climb{position:relative;margin:0;border-radius:6px;overflow:hidden;box-shadow:14px 14px 0 #fdd535;aspect-ratio:850/575}
+.climb img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;will-change:transform}
 .challenge-copy{display:flex;flex-direction:column;gap:20px}
 .challenge-copy h2{font:400 clamp(52px,6vw,88px)/.95 var(--anton);text-transform:uppercase}
 .challenge-copy p{color:#c9ccd6;max-width:44ch}
@@ -150,7 +150,10 @@ section{position:relative}
 /* pinned mode: vertical scroll drives the strip sideways */
 .reel-pin-on .reel-sec{padding:0;overflow:visible}
 .reel-pin-on .reel-sticky > .wrap{width:100%}
-.reel-pin-on .reel-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:72px 0 24px}
+.reel-pin-on .reel-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:safe center;padding:104px 0 24px}
+.reel-pin-on .reel-sec .sec-head h2{font-size:clamp(40px,8.5vh,96px)}
+.reel-pin-on .frame{flex-basis:clamp(280px,calc((100vh - 430px) * 1.78),560px)}
+.reel-pin-on .mq p{font-size:clamp(15px,2.3vh,19px)}
 .reel-pin-on .reel-sec .sec-head{margin-bottom:28px}
 .reel-pin-on .reel{overflow:visible;scroll-snap-type:none;will-change:translate}
 .reel-pin-on .reel-controls{display:none}
@@ -255,12 +258,12 @@ section{position:relative}
   .ps-circle::before{border-left-width:20px;border-top-width:12px;border-bottom-width:12px}
   .player-start .score{display:none}
   .reel{gap:16px;scroll-padding:0 20px;padding:10px 20px 18px}
-  .reel-pin-on .reel-sticky{padding:64px 0 16px}
+  .reel-pin-on .reel-sticky{padding:88px 0 16px}
   .reel-pin-on .reel-sec .sec-head{margin-bottom:16px}
   .reel-pin-on .reel-progress{width:calc(100% - 40px)}
   .reel-pin-on .frame{flex-basis:78vw}
   .mq p{font-size:16px}
-  .ballot-bear{width:116px;right:16px}
+  .ballot-bear{width:180px;right:12px}
   .challenge-intro{grid-template-columns:1fr;gap:36px;margin-bottom:48px}
   .climb{box-shadow:8px 8px 0 #fdd535;margin-right:8px}
   .reel-controls{display:none}
@@ -426,7 +429,7 @@ section{position:relative}
     </div>
     <div class="collage" id="collage" data-stretch data-reveal="1.5">
       <div class="wedge w1" aria-hidden="true"><img src="assets/img/flowers-sm.webp" srcset="assets/img/flowers-sm.webp 800w, assets/img/flowers.webp 1600w" sizes="34vw" alt="" loading="lazy" data-drift="0.75"></div>
-      <div class="wedge w2"><img src="assets/img/portrait.webp" alt="Portrait of a woman half in shadow, smiling slightly" loading="lazy" data-drift="1"></div>
+      <div class="wedge w2"><img src="assets/img/portrait.webp" alt="Portrait of a woman half in shadow, smiling slightly" loading="lazy" data-drift="1.6"></div>
       <div class="wedge w3" aria-hidden="true"><img src="assets/img/green-grid-sm.webp" srcset="assets/img/green-grid-sm.webp 800w, assets/img/green-grid.webp 1600w" sizes="34vw" alt="" loading="lazy" data-drift="1.25"></div>
       <span class="w-label l" aria-hidden="true">feel</span>
       <span class="w-label r" aria-hidden="true">think</span>
@@ -459,12 +462,11 @@ section{position:relative}
       <a class="btn btn-outline on-light poll-link" href="#" target="_blank" rel="noopener"><span class="lbl">Open the poll</span></a>
       <p class="small">Scan the code or open the link to vote. It only takes a few seconds.</p>
       <div class="mateo">
-        <p class="mateo-note">Dylan, send me an epic picture of yourself so I can put you in here too!</p></p>
+        <p class="mateo-note">Dylan, send me an epic picture of yourself so I can put you in here too!</p>
         <img src="assets/img/mateo.webp" alt="Mateo in a suit, pointing at the camera" loading="lazy" width="700" height="784">
       </div>
     </div>
     <div class="cited">
-      <h3 data-reveal="0.45">THE BOOKS</h3>
       <div class="books" data-row>
         <figure data-reveal="0.9"><img src="assets/img/book-guzman.webp" alt="Cover of I Never Thought of It That Way by Mónica Guzmán" loading="lazy" width="168" height="252"><figcaption>Mónica Guzmán, 2022</figcaption></figure>
         <figure data-reveal="0.9"><img src="assets/img/book-hayhoe.webp" alt="Cover of Saving Us by Katharine Hayhoe" loading="lazy" width="168" height="255"><figcaption>Katharine Hayhoe, 2021</figcaption></figure>
@@ -694,6 +696,8 @@ const scrollApi = (() => {
   const heroBg = document.getElementById('hero-bg');
   const collage = document.getElementById('collage');
   const driftImgs = Array.from(collage.querySelectorAll('img[data-drift]'));
+  const climbFrame = document.querySelector('.climb'), climbImg = climbFrame && climbFrame.querySelector('img');
+  let climbBox = null; let climbLast = null;
   let boxes = [], collageBox = null, heroH = 0;
   let lastY = window.scrollY, lastT = 0, speed = 0, running = false;
   const applied = new WeakMap();
@@ -703,6 +707,7 @@ const scrollApi = (() => {
     const y = window.scrollY;
     boxes = stretchEls.map(el => { const r = el.getBoundingClientRect(); return {el, top:r.top + y, bottom:r.bottom + y}; });
     const c = collage.getBoundingClientRect(); collageBox = {top:c.top + y, h:c.height};
+    if (climbFrame) { const r = climbFrame.getBoundingClientRect(); climbBox = {top:r.top + y, h:r.height}; }
     heroH = document.getElementById('top').offsetHeight;
   }
   function setT(el, val, cache){ if (cache.get(el) !== val) { el.style.transform = val; cache.set(el, val); } }
@@ -735,10 +740,15 @@ const scrollApi = (() => {
       const p = clampNum((y + vh / 2 - center) / (vh / 2 + collageBox.h / 2), -1, 1);
       for (const img of driftImgs) {
         const r = parseFloat(img.dataset.drift);
-        const d = clampNum(-45 * p * r, -45, 45).toFixed(1);
+        const d = clampNum(-45 * p * r, -60, 60).toFixed(1);
         const val = 'translate3d(0,' + d + 'px,0)';
         if (driftLast.get(img) !== val) { img.style.transform = val; driftLast.set(img, val); }
       }
+    }
+    if (climbBox && climbImg) {
+      const p = clampNum((y + vh / 2 - (climbBox.top + climbBox.h / 2)) / (vh / 2 + climbBox.h / 2), -1, 1);
+      const val = 'translate3d(0,' + (-p * climbBox.h * 0.11).toFixed(1) + 'px,0)';
+      if (val !== climbLast) { climbImg.style.transform = val; climbLast = val; }
     }
     if (atRest && Math.abs(y - lastY) < 0.5) { speed = 0; running = false; lastT = 0; for (const b of boxes) setT(b.el, '', applied); return; }
     requestAnimationFrame(frame);
